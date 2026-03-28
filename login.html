@@ -71,10 +71,6 @@
         <p class="muted" style="margin: 0 0 1rem;">Students get a personalized feed; organizers publish opportunities.</p>
 
         <input type="hidden" id="auth-mode" value="signin" />
-        <div class="auth-mode-bar" role="group" aria-label="Sign in or register">
-          <button type="button" class="chip is-selected" id="mode-signin">Sign in</button>
-          <button type="button" class="chip" id="mode-signup">Create account</button>
-        </div>
 
         <p id="auth-alert" class="auth-alert" role="status" hidden></p>
 
@@ -99,7 +95,7 @@
             </div>
             <div class="btn-row" style="margin-top: 0.5rem;">
               <button type="submit" class="btn btn--primary btn--block" id="student-submit-btn">Sign in</button>
-              <a class="btn btn--ghost btn--block js-open-student-signup" href="#">Create student account</a>
+              <button type="button" class="btn btn--ghost btn--block js-toggle-auth-mode">Sign up</button>
             </div>
           </form>
 
@@ -122,7 +118,7 @@
             </div>
             <div class="btn-row" style="margin-top: 0.5rem;">
               <button type="submit" class="btn btn--primary btn--block" id="org-submit-btn">Sign in</button>
-              <a class="btn btn--ghost btn--block js-open-organizer-signup" href="#">Register as organizer</a>
+              <button type="button" class="btn btn--ghost btn--block js-toggle-auth-mode">Sign up</button>
             </div>
           </form>
         </div>

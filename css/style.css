@@ -1512,27 +1512,6 @@ body.is-ready main {
 }
 
 /* ——— Auth + dashboard (InsForge) ——— */
-.auth-mode-bar {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
-}
-
-.auth-mode-bar .chip {
-  cursor: pointer;
-  border: 1px solid var(--border);
-  background: transparent;
-  font: inherit;
-  color: var(--text-muted);
-}
-
-.auth-mode-bar .chip.is-selected {
-  border-color: var(--accent-line);
-  color: var(--text);
-  background: var(--accent-soft);
-}
-
 .auth-alert {
   margin: 0 0 1rem;
   font-size: 0.95rem;

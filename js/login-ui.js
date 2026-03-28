@@ -1,6 +1,6 @@
 /**
- * Login page UI only (no InsForge). Runs as a classic script so Student/Organizer
- * and Sign in / Create account work even if the ES module layer is slow or fails.
+ * Login page UI only (no InsForge). Student/Organizer tabs and sign-in vs sign-up
+ * (toggle under the primary button) work even if the ES module layer is slow or fails.
  */
 (function () {
   function qs(id) {
@@ -27,6 +27,9 @@
     var ob = qs("org-submit-btn");
     if (sb) sb.textContent = signup ? "Create student account" : "Sign in";
     if (ob) ob.textContent = signup ? "Create organizer account" : "Sign in";
+    document.querySelectorAll(".js-toggle-auth-mode").forEach(function (btn) {
+      btn.textContent = signup ? "Sign in" : "Sign up";
+    });
     var tabOrg2 = qs("tab-organizer");
     var orgTabOn = tabOrg2 && tabOrg2.getAttribute("aria-selected") === "true";
     var sn = qs("student-name");
@@ -77,49 +80,18 @@
     });
   }
 
-  function initModeToggle() {
-    var signinBtn = qs("mode-signin");
-    var signupBtn = qs("mode-signup");
+  function initAuthModeToggle() {
     var modeInput = qs("auth-mode");
-    if (!signinBtn || !signupBtn || !modeInput) return;
-    signinBtn.addEventListener("click", function () {
-      modeInput.value = "signin";
-      signinBtn.classList.add("is-selected");
-      signupBtn.classList.remove("is-selected");
-      syncSignupFields();
-    });
-    signupBtn.addEventListener("click", function () {
-      modeInput.value = "signup";
-      signupBtn.classList.add("is-selected");
-      signinBtn.classList.remove("is-selected");
-      syncSignupFields();
+    if (!modeInput) return;
+    document.querySelectorAll(".js-toggle-auth-mode").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        modeInput.value = isSignupMode() ? "signin" : "signup";
+        syncSignupFields();
+      });
     });
   }
 
-  function initSignupShortcutLinks() {
-    if (!qs("auth-mode")) return;
-    document.querySelectorAll(".js-open-student-signup").forEach(function (el) {
-      el.addEventListener("click", function (e) {
-        e.preventDefault();
-        qs("auth-mode").value = "signup";
-        qs("mode-signup").classList.add("is-selected");
-        qs("mode-signin").classList.remove("is-selected");
-        var t = qs("tab-student");
-        if (t) t.click();
-        syncSignupFields();
-      });
-    });
-    document.querySelectorAll(".js-open-organizer-signup").forEach(function (el) {
-      el.addEventListener("click", function (e) {
-        e.preventDefault();
-        qs("auth-mode").value = "signup";
-        qs("mode-signup").classList.add("is-selected");
-        qs("mode-signin").classList.remove("is-selected");
-        var t = qs("tab-organizer");
-        if (t) t.click();
-        syncSignupFields();
-      });
-    });
+  function initVerifyCancel() {
     var cancelVerify = qs("verify-cancel");
     if (cancelVerify) {
       cancelVerify.addEventListener("click", function () {
@@ -141,8 +113,8 @@
 
   function boot() {
     initTabs();
-    initModeToggle();
-    initSignupShortcutLinks();
+    initAuthModeToggle();
+    initVerifyCancel();
     syncSignupFields();
   }
 
