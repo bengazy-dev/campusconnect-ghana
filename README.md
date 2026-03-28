@@ -56,7 +56,7 @@ campusconnect-ghana/
 
 - **Kobby** — Frontend (HTML pages + CSS)
 - **Nana** — Backend (Firebase + matching logic)
-- **[Your Name]** — Systems (Auth + integration + coordination)
+- **Bengazy** — Systems (Auth + integration + coordination)
 
 ## Getting Started
 
