@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your profile — CampusConnect Ghana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <meta name="theme-color" content="#070a0f" />
+  <script>
+  (function(){try{var k="campusconnect-theme",t=localStorage.getItem(k);if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();
+  </script>
+
+</head>
+<body class="page page--onboarding">
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="logo" href="index.html">
+        <span class="logo__mark"><img src="assets/logo.png" alt="" width="28" height="28" decoding="async" /></span>
+        CampusConnect
+      </a>
+      <div class="header-actions">
+        <button type="button" class="theme-toggle" id="theme-toggle" role="switch">
+          <span class="theme-toggle__thumb" aria-hidden="true"></span>
+        </button>
+        <div class="nav-shell">
+          <input type="checkbox" id="nav-toggle" class="nav__toggle" />
+          <label for="nav-toggle" class="nav__burger" aria-label="Open menu"><span></span></label>
+          <nav class="nav" id="site-nav" aria-label="Primary">
+        <a href="login.html">Sign in</a>
+        <a href="index.html">Feed</a>
+      </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <header class="page-head">
+      <div class="steps" aria-label="Progress">
+        <span class="is-current">Profile basics</span>
+        <span>Interests</span>
+        <span>Goals &amp; format</span>
+      </div>
+      <p class="eyebrow">Onboarding</p>
+      <h1>Shape your opportunity DNA</h1>
+      <p class="lead">
+        Same opportunities for everyone — a completely different order for you. A few honest answers are enough for the matcher to do its job.
+      </p>
+    </header>
+
+    <form class="card card--glass form-grid" id="onboarding-form" action="index.html" method="get">
+      <section class="form-section" aria-labelledby="sec-basics">
+        <h2 class="form-section__title" id="sec-basics">Where you study</h2>
+        <p class="form-section__hint">We never spam — this anchors local and on-campus opportunities.</p>
+        <div class="form-grid form-grid--2">
+          <div>
+            <label for="institution">Institution</label>
+            <input type="text" id="institution" name="institution" required placeholder="e.g. University of Ghana" />
+          </div>
+          <div>
+            <label for="course">Programme / course</label>
+            <input type="text" id="course" name="course" required placeholder="e.g. Computer Science" />
+          </div>
+          <div>
+            <label for="year">Year of study</label>
+            <select id="year" name="year" required>
+              <option value="" disabled selected>Select year</option>
+              <option value="1">Year 1</option>
+              <option value="2">Year 2</option>
+              <option value="3">Year 3</option>
+              <option value="4">Year 4+</option>
+              <option value="pg">Postgraduate</option>
+            </select>
+          </div>
+          <div>
+            <label for="campus">Campus or city (optional)</label>
+            <input type="text" id="campus" name="campus" placeholder="e.g. Legon, Kumasi" />
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section" aria-labelledby="sec-interests">
+        <h2 class="form-section__title" id="sec-interests">What pulls you in</h2>
+        <p class="form-section__hint">Pick everything that sounds like you — more tags mean a wider net, ranking still prioritizes fit.</p>
+        <span id="interests-label" class="field-label">Interests</span>
+        <div class="chip-group" role="group" aria-labelledby="interests-label">
+          <label class="chip"><input type="checkbox" name="interest" value="tech" hidden /> Tech &amp; software</label>
+          <label class="chip"><input type="checkbox" name="interest" value="business" hidden /> Business &amp; finance</label>
+          <label class="chip"><input type="checkbox" name="interest" value="research" hidden /> Research</label>
+          <label class="chip"><input type="checkbox" name="interest" value="creative" hidden /> Design &amp; creative</label>
+          <label class="chip"><input type="checkbox" name="interest" value="policy" hidden /> Policy &amp; governance</label>
+          <label class="chip"><input type="checkbox" name="interest" value="health" hidden /> Health &amp; sciences</label>
+          <label class="chip"><input type="checkbox" name="interest" value="engineering" hidden /> Engineering</label>
+          <label class="chip"><input type="checkbox" name="interest" value="law" hidden /> Law</label>
+        </div>
+      </section>
+
+      <section class="form-section" aria-labelledby="sec-goals">
+        <h2 class="form-section__title" id="sec-goals">Where you’re headed</h2>
+        <p class="form-section__hint">Rough notes are fine — “internship abroad”, “campus org”, “research lab”.</p>
+        <div>
+          <label for="goals">Career goals (short)</label>
+          <textarea id="goals" name="goals" placeholder="e.g. Internship in fintech, MSc abroad, campus leadership…"></textarea>
+        </div>
+      </section>
+
+      <section class="form-section" aria-labelledby="sec-format">
+        <h2 class="form-section__title" id="sec-format">How you like to engage</h2>
+        <span id="format-label" class="field-label">Preferred formats</span>
+        <div class="chip-group" role="group" aria-labelledby="format-label">
+          <label class="chip"><input type="checkbox" name="format" value="remote" hidden /> Remote</label>
+          <label class="chip"><input type="checkbox" name="format" value="in-person" hidden /> In person</label>
+          <label class="chip"><input type="checkbox" name="format" value="hybrid" hidden /> Hybrid</label>
+          <label class="chip"><input type="checkbox" name="format" value="short" hidden /> Short workshops</label>
+        </div>
+      </section>
+
+      <div class="btn-row">
+        <a class="btn btn--ghost" href="login.html">Back</a>
+        <button type="submit" class="btn btn--primary">Save &amp; open my feed</button>
+      </div>
+    </form>
+  </main>
+
+  <footer class="site-foot">ALU Hackathon 2026 · CampusConnect Ghana</footer>
+
+  <script>
+    (function () {
+      document.querySelectorAll(".chip input[type='checkbox']").forEach(function (input) {
+        function sync() {
+          input.closest(".chip").classList.toggle("is-selected", input.checked);
+        }
+        input.addEventListener("change", sync);
+        sync();
+      });
+    })();
+  </script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>

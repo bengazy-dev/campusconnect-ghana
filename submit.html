@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Post an opportunity — CampusConnect Ghana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <meta name="theme-color" content="#070a0f" />
+  <script>
+  (function(){try{var k="campusconnect-theme",t=localStorage.getItem(k);if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();
+  </script>
+
+</head>
+<body class="page page--submit">
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="logo" href="index.html">
+        <span class="logo__mark"><img src="assets/logo.png" alt="" width="28" height="28" decoding="async" /></span>
+        CampusConnect
+      </a>
+      <div class="header-actions">
+        <button type="button" class="theme-toggle" id="theme-toggle" role="switch">
+          <span class="theme-toggle__thumb" aria-hidden="true"></span>
+        </button>
+        <div class="nav-shell">
+          <input type="checkbox" id="nav-toggle" class="nav__toggle" />
+          <label for="nav-toggle" class="nav__burger" aria-label="Open menu"><span></span></label>
+          <nav class="nav" id="site-nav" aria-label="Primary">
+        <a href="index.html">Feed</a>
+        <a href="saved.html">Saved</a>
+        <a href="submit.html" class="is-active">Post</a>
+        <a href="login.html">Account</a>
+      </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <header class="page-head">
+      <p class="eyebrow">Organizers</p>
+      <h1>Put the right eyes on your opportunity</h1>
+      <p class="lead">
+        Rich tags and crisp eligibility rules mean students who actually qualify see you first — not everyone, not no one.
+      </p>
+    </header>
+
+    <form class="card card--glass form-grid" id="submit-form">
+      <section class="form-section" aria-labelledby="sec-core">
+        <h2 class="form-section__title" id="sec-core">The headline</h2>
+        <div class="form-grid form-grid--2">
+          <div>
+            <label for="opp-title">Title</label>
+            <input type="text" id="opp-title" name="title" required placeholder="Short, specific headline" />
+          </div>
+          <div>
+            <label for="opp-type">Type</label>
+            <select id="opp-type" name="type" required>
+              <option value="" disabled selected>Select type</option>
+              <option value="scholarship">Scholarship</option>
+              <option value="internship">Internship</option>
+              <option value="workshop">Workshop</option>
+              <option value="competition">Competition</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div>
+            <label for="org-name">Organization</label>
+            <input type="text" id="org-name" name="organization" required />
+          </div>
+          <div>
+            <label for="apply-url">Application / info URL</label>
+            <input type="url" id="apply-url" name="url" placeholder="https://" />
+          </div>
+          <div>
+            <label for="deadline">Application deadline</label>
+            <input type="date" id="deadline" name="deadline" />
+          </div>
+          <div>
+            <label for="location">Location / format</label>
+            <input type="text" id="location" name="location" placeholder="e.g. Remote, Accra, Hybrid" />
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section" aria-labelledby="sec-copy">
+        <h2 class="form-section__title" id="sec-copy">Tell the story</h2>
+        <div>
+          <label for="description">Description</label>
+          <textarea id="description" name="description" required placeholder="What it is, who it’s for, what students need to apply…"></textarea>
+        </div>
+        <div>
+          <label for="eligibility">Eligibility (bullet points ok)</label>
+          <textarea id="eligibility" name="eligibility" placeholder="Year of study, fields of study, GPA, demographics if relevant…"></textarea>
+        </div>
+      </section>
+
+      <section class="form-section" aria-labelledby="sec-match">
+        <h2 class="form-section__title" id="sec-match">Matching engine</h2>
+        <p class="form-section__hint">Same vocabulary as student interests — that’s how relevance is computed.</p>
+        <span id="target-label" class="field-label">Tags</span>
+        <div class="chip-group" role="group" aria-labelledby="target-label">
+          <label class="chip"><input type="checkbox" name="tag" value="tech" hidden /> tech</label>
+          <label class="chip"><input type="checkbox" name="tag" value="business" hidden /> business</label>
+          <label class="chip"><input type="checkbox" name="tag" value="research" hidden /> research</label>
+          <label class="chip"><input type="checkbox" name="tag" value="creative" hidden /> creative</label>
+          <label class="chip"><input type="checkbox" name="tag" value="policy" hidden /> policy</label>
+          <label class="chip"><input type="checkbox" name="tag" value="health" hidden /> health</label>
+          <label class="chip"><input type="checkbox" name="tag" value="engineering" hidden /> engineering</label>
+          <label class="chip"><input type="checkbox" name="tag" value="law" hidden /> law</label>
+        </div>
+        <div class="form-grid form-grid--2" style="margin-top: 1.25rem;">
+          <div>
+            <label for="year-min">Min year of study</label>
+            <select id="year-min" name="year_min">
+              <option value="">Any</option>
+              <option value="1">Year 1</option>
+              <option value="2">Year 2</option>
+              <option value="3">Year 3</option>
+              <option value="4">Year 4+</option>
+              <option value="pg">Postgraduate only</option>
+            </select>
+          </div>
+          <div>
+            <label for="year-max">Max year of study</label>
+            <select id="year-max" name="year_max">
+              <option value="">Any</option>
+              <option value="1">Year 1</option>
+              <option value="2">Year 2</option>
+              <option value="3">Year 3</option>
+              <option value="4">Year 4+</option>
+              <option value="pg">Including postgraduate</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <p class="muted" id="submit-status" role="status" aria-live="polite" hidden></p>
+
+      <div class="btn-row">
+        <a class="btn btn--ghost" href="index.html">Cancel</a>
+        <button type="submit" class="btn btn--primary">Publish opportunity</button>
+      </div>
+    </form>
+  </main>
+
+  <footer class="site-foot">ALU Hackathon 2026 · CampusConnect Ghana</footer>
+
+  <script>
+    (function () {
+      document.querySelectorAll(".chip input[type='checkbox']").forEach(function (input) {
+        function sync() {
+          input.closest(".chip").classList.toggle("is-selected", input.checked);
+        }
+        input.addEventListener("change", sync);
+        sync();
+      });
+      document.getElementById("submit-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        var status = document.getElementById("submit-status");
+        status.hidden = false;
+        status.textContent = "Submission received — it will appear on the feed once publishing is connected.";
+      });
+    })();
+  </script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>
