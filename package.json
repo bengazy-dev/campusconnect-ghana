@@ -5,6 +5,7 @@
   "scripts": {
     "build:config": "esbuild js/insforge-config-source.js --bundle --format=esm --outfile=js/vendor/insforge-config.bundle.js --platform=browser",
     "env:generate": "node scripts/generate-insforge-env.mjs",
+    "setup:env": "node scripts/setup-env.mjs",
     "postinstall": "npm run build:config && npm run env:generate",
     "create-test-accounts": "node scripts/create-test-accounts.mjs"
   },

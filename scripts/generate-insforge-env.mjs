@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, existsSync, copyFileSync } from "fs";
+import { writeFileSync, existsSync, copyFileSync } from "fs";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 import { getInsforgeFromEnv } from "./load-env.mjs";
@@ -7,9 +7,18 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const outPath = resolve(root, "js/insforge-env.js");
 const examplePath = resolve(root, "js/insforge-env.example.js");
 
+/** Treat example / template values as unset so we never bake placeholders into js/insforge-env.js */
+function isPlaceholderConfig(baseUrl, anonKey) {
+  if (!baseUrl || !anonKey) return true;
+  const blob = (baseUrl + " " + anonKey).toLowerCase();
+  if (!/^https?:\/\//i.test(baseUrl)) return true;
+  if (/your_appkey|your_anon|your_insforge|example\.com|changeme/i.test(blob)) return true;
+  return false;
+}
+
 const { baseUrl, anonKey } = getInsforgeFromEnv();
 
-if (!baseUrl || !anonKey) {
+if (isPlaceholderConfig(baseUrl, anonKey)) {
   if (!existsSync(examplePath)) {
     console.warn("Missing js/insforge-env.example.js; writing minimal placeholder.");
     writeFileSync(
@@ -20,7 +29,7 @@ if (!baseUrl || !anonKey) {
   } else {
     copyFileSync(examplePath, outPath);
     console.warn(
-      "INSFORGE_BASE_URL / INSFORGE_ANON_KEY not set. Copied js/insforge-env.example.js → js/insforge-env.js. Add .env from .env.example and run: npm run env:generate"
+      "INSFORGE_BASE_URL / INSFORGE_ANON_KEY missing or still template values. Copied js/insforge-env.example.js → js/insforge-env.js. Edit .env with real keys, then: npm run env:generate"
     );
   }
 } else {
