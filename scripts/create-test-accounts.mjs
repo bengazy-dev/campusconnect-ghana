@@ -1,18 +1,15 @@
 /**
  * Optional: creates student + organizer test users via InsForge Auth.
- * Requires: npm install
- * Env (optional): INSFORGE_URL, INSFORGE_ANON_KEY
- *
- * If your project enforces email verification, complete verification in the
- * dashboard or temporarily disable it for local testing — then run this script.
+ * Set INSFORGE_BASE_URL and INSFORGE_ANON_KEY in .env (see .env.example) or the environment.
  */
 import { createClient } from "@insforge/sdk";
+import { getInsforgeFromEnv } from "./load-env.mjs";
 
-const baseUrl = (process.env.INSFORGE_URL || "https://jwynn43g.us-east.insforge.app").replace(
-  /\/$/,
-  ""
-);
-const anonKey = process.env.INSFORGE_ANON_KEY || "ik_13c66ce60e8dcbdadd894c54383d5c98";
+const { baseUrl, anonKey } = getInsforgeFromEnv();
+if (!baseUrl || !anonKey) {
+  console.error("Missing INSFORGE_BASE_URL or INSFORGE_ANON_KEY. Copy .env.example to .env and fill in values.");
+  process.exit(1);
+}
 
 const insforge = createClient({ baseUrl, anonKey });
 

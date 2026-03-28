@@ -1,7 +1,11 @@
 CampusConnect Ghana — test logins (InsForge)
 
 Run the site over http://localhost (e.g. npx serve .) — not file:// — so auth cookies work.
-After git clone, run: npm install (rebuilds js/vendor/insforge-config.bundle.js).
+
+InsForge config is env-based:
+  1. Copy .env.example to .env and set INSFORGE_BASE_URL and INSFORGE_ANON_KEY.
+  2. npm install   (runs build:config + env:generate)
+  3. Or after editing .env: npm run env:generate   (writes js/insforge-env.js, gitignored)
 
 Preferred: use the login page (Create account) with the emails/passwords below.
 
