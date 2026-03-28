@@ -29,10 +29,11 @@
           <input type="checkbox" id="nav-toggle" class="nav__toggle" />
           <label for="nav-toggle" class="nav__burger" aria-label="Open menu"><span></span></label>
           <nav class="nav" id="site-nav" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="saved.html">Saved</a>
-        <a href="submit.html" class="is-active">Post</a>
-        <a href="login.html">Logout</a>
+        <a href="index.html">Feed</a>
+        <a href="saved.html" class="js-student-only" hidden>Saved</a>
+        <a href="submit.html" class="is-active js-organizer-only">Post</a>
+        <a href="organizer-dashboard.html" class="js-organizer-only">Dashboard</a>
+        <a href="login.html">Account</a>
       </nav>
         </div>
       </div>
@@ -48,40 +49,42 @@
       </p>
     </header>
 
-    <form class="card card--glass form-grid" id="submitForm">
+    <form class="card card--glass form-grid" id="submit-form">
       <section class="form-section" aria-labelledby="sec-core">
         <h2 class="form-section__title" id="sec-core">The headline</h2>
         <div class="form-grid form-grid--2">
           <div>
-            <label for="eventTitle">Title</label>
-            <input type="text" id="eventTitle" name="title" required placeholder="Short, specific headline" />
+            <label for="opp-title">Title</label>
+            <input type="text" id="opp-title" name="title" required placeholder="Short, specific headline" />
           </div>
           <div>
-            <label for="eventCategory">Type</label>
-            <select id="eventCategory" name="type" required>
+            <label for="opp-type">Type</label>
+            <select id="opp-type" name="type" required>
               <option value="" disabled selected>Select type</option>
               <option value="scholarship">Scholarship</option>
               <option value="internship">Internship</option>
               <option value="workshop">Workshop</option>
               <option value="competition">Competition</option>
+              <option value="networking">Networking</option>
+              <option value="seminar">Seminar</option>
               <option value="other">Other</option>
             </select>
           </div>
           <div>
-            <label for="eventInstitution">Organization</label>
-            <input type="text" id="eventInstitution" name="organization" required />
+            <label for="org-name">Organization</label>
+            <input type="text" id="org-name" name="organization" required />
           </div>
           <div>
             <label for="apply-url">Application / info URL</label>
             <input type="url" id="apply-url" name="url" placeholder="https://" />
           </div>
           <div>
-            <label for="eventDate">Application deadline</label>
-            <input type="date" id="eventDate" name="deadline" />
+            <label for="deadline">Application deadline</label>
+            <input type="date" id="deadline" name="deadline" />
           </div>
           <div>
-            <label for="eventFormat">Location / format</label>
-            <input type="text" id="eventFormat" name="location" placeholder="e.g. Remote, Accra, Hybrid" />
+            <label for="location">Location / format</label>
+            <input type="text" id="location" name="location" placeholder="e.g. Remote, Accra, Hybrid" />
           </div>
         </div>
       </section>
@@ -89,8 +92,8 @@
       <section class="form-section" aria-labelledby="sec-copy">
         <h2 class="form-section__title" id="sec-copy">Tell the story</h2>
         <div>
-          <label for="eventDescription">Description</label>
-          <textarea id="eventDescription" name="description" required placeholder="What it is, who it’s for, what students need to apply…"></textarea>
+          <label for="description">Description</label>
+          <textarea id="description" name="description" required placeholder="What it is, who it’s for, what students need to apply…"></textarea>
         </div>
         <div>
           <label for="eligibility">Eligibility (bullet points ok)</label>
@@ -138,7 +141,7 @@
         </div>
       </section>
 
-      <p class="muted" id="submitSuccess" role="status" aria-live="polite" hidden></p>
+      <p class="muted" id="submit-status" role="status" aria-live="polite" hidden></p>
 
       <div class="btn-row">
         <a class="btn btn--ghost" href="index.html">Cancel</a>
@@ -158,14 +161,10 @@
         input.addEventListener("change", sync);
         sync();
       });
-      document.getElementById("submitForm").addEventListener("submit", function (e) {
-        e.preventDefault();
-        var status = document.getElementById("submitSuccess");
-        status.hidden = false;
-        status.textContent = "Submission received — it will appear on the feed once publishing is connected.";
-      });
     })();
   </script>
+  <script src="js/insforge-env.js"></script>
+  <script type="module" src="js/submit-app.js"></script>
   <script src="js/app.js" defer></script>
 </body>
 </html>

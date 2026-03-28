@@ -1,0 +1,25 @@
+CampusConnect Ghana — test logins (InsForge)
+
+Run the site over http://localhost (e.g. npx serve .) — not file:// — so auth cookies work.
+After git clone, run: npm install (rebuilds js/vendor/insforge-config.bundle.js).
+
+Preferred: use the login page (Create account) with the emails/passwords below.
+
+Optional script (after npm install):
+  npm run create-test-accounts
+
+If InsForge has "require email verification" enabled, the script only registers
+pending users — finish verification with the code InsForge emails you, or
+temporarily disable verification in the InsForge auth settings for local demos.
+
+--- Student (feed, saved, onboarding) ---
+Email:    student.test@campusconnect.local
+Password: CampusTestStudent!8
+
+After first sign-in, complete onboarding once, then open index.html (feed).
+
+--- Organizer (post opportunities, dashboard) ---
+Email:    organizer.test@campusconnect.local
+Password: CampusTestOrganizer!8
+
+After sign-in you should land on organizer-dashboard.html.

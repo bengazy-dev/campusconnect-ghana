@@ -29,7 +29,7 @@
           <input type="checkbox" id="nav-toggle" class="nav__toggle" />
           <label for="nav-toggle" class="nav__burger" aria-label="Open menu"><span></span></label>
           <nav class="nav" id="site-nav" aria-label="Primary">
-        <a href="index.html">Home</a>
+        <a href="index.html">Feed</a>
         <a href="saved.html">Saved</a>
         <a href="submit.html">Post an opportunity</a>
       </nav>
@@ -68,58 +68,76 @@
       <div class="auth-panel card card--glass">
         <p class="eyebrow" style="margin-bottom: 0.5rem;">Account</p>
         <h1>Sign in to your space</h1>
-        <p class="muted" style="margin: 0 0 1.35rem;">Welcome back — choose student or organizer below.</p>
+        <p class="muted" style="margin: 0 0 1rem;">Students get a personalized feed; organizers publish opportunities.</p>
 
-        <div class="tabs" role="tablist" aria-label="Authentication mode">
-          <button type="button" id="loginTab" role="tab" aria-selected="true" aria-controls="loginFormContainer">Login</button>
-          <button type="button" id="signupTab" role="tab" aria-selected="false" aria-controls="signupFormContainer">Sign Up</button>
+        <input type="hidden" id="auth-mode" value="signin" />
+        <div class="auth-mode-bar" role="group" aria-label="Sign in or register">
+          <button type="button" class="chip is-selected" id="mode-signin">Sign in</button>
+          <button type="button" class="chip" id="mode-signup">Create account</button>
         </div>
 
-        <div id="loginFormContainer">
-          <div class="tabs" role="tablist" aria-label="Account type" style="margin-top: 1rem;">
-            <button type="button" id="tab-student" role="tab" aria-selected="true" aria-controls="loginForm">Student</button>
-            <button type="button" id="tab-organizer" role="tab" aria-selected="false" aria-controls="loginForm">Organizer</button>
+        <p id="auth-alert" class="auth-alert" role="status" hidden></p>
+
+        <div id="auth-forms-wrap">
+          <div class="tabs" role="tablist" aria-label="Account type">
+            <button type="button" id="tab-student" role="tab" aria-selected="true" aria-controls="panel-student">Student</button>
+            <button type="button" id="tab-organizer" role="tab" aria-selected="false" aria-controls="panel-organizer">Organizer</button>
           </div>
 
-          <form id="loginForm" class="form-grid" data-role="student" style="margin-top: 1rem;">
-            <div>
-              <label for="loginEmail">Email</label>
-              <input type="email" id="loginEmail" name="email" autocomplete="email" required placeholder="you@university.edu.gh" />
+          <form id="panel-student" role="tabpanel" aria-labelledby="tab-student" class="form-grid" data-role="student">
+            <div class="js-signup-field" hidden>
+              <label for="student-name">Full name</label>
+              <input type="text" id="student-name" name="name" autocomplete="name" placeholder="Your name" />
             </div>
             <div>
-              <label for="loginPassword">Password</label>
-              <input type="password" id="loginPassword" name="password" autocomplete="current-password" required minlength="6" />
+              <label for="student-email">Email</label>
+              <input type="email" id="student-email" name="email" autocomplete="email" required placeholder="you@university.edu.gh" />
             </div>
-            <p id="loginError" class="muted" role="alert" aria-live="polite" style="margin: 0; color: var(--danger, #f87171); min-height: 1.25em;"></p>
+            <div>
+              <label for="student-password">Password</label>
+              <input type="password" id="student-password" name="password" autocomplete="current-password" required minlength="8" />
+            </div>
             <div class="btn-row" style="margin-top: 0.5rem;">
-              <button type="submit" class="btn btn--primary btn--block">Sign in</button>
+              <button type="submit" class="btn btn--primary btn--block" id="student-submit-btn">Sign in</button>
+              <a class="btn btn--ghost btn--block js-open-student-signup" href="#">Create student account</a>
+            </div>
+          </form>
+
+          <form id="panel-organizer" role="tabpanel" aria-labelledby="tab-organizer" class="form-grid" hidden data-role="organizer">
+            <div class="js-signup-field" hidden>
+              <label for="org-name">Your name</label>
+              <input type="text" id="org-name" name="name" autocomplete="name" placeholder="Contact name" />
+            </div>
+            <div id="org-signup-row" class="js-signup-field" hidden>
+              <label for="org-display-name">Organization</label>
+              <input type="text" id="org-display-name" name="org_display" autocomplete="organization" placeholder="Organization name" />
+            </div>
+            <div>
+              <label for="org-email">Work email</label>
+              <input type="email" id="org-email" name="email" autocomplete="email" required placeholder="team@organization.org" />
+            </div>
+            <div>
+              <label for="org-password">Password</label>
+              <input type="password" id="org-password" name="password" autocomplete="current-password" required minlength="8" />
+            </div>
+            <div class="btn-row" style="margin-top: 0.5rem;">
+              <button type="submit" class="btn btn--primary btn--block" id="org-submit-btn">Sign in</button>
+              <a class="btn btn--ghost btn--block js-open-organizer-signup" href="#">Register as organizer</a>
             </div>
           </form>
         </div>
 
-        <div id="signupFormContainer" hidden>
-          <div class="tabs" role="tablist" aria-label="Account type" style="margin-top: 1rem;">
-            <button type="button" id="signup-tab-student" role="tab" aria-selected="true" aria-controls="signupForm">Student</button>
-            <button type="button" id="signup-tab-organizer" role="tab" aria-selected="false" aria-controls="signupForm">Organizer</button>
-          </div>
-
-          <form id="signupForm" class="form-grid" data-role="student" style="margin-top: 1rem;">
+        <div id="verify-panel" class="verify-panel card card--flat" hidden>
+          <p class="eyebrow">Verify email</p>
+          <p class="muted">We sent a code to <strong id="verify-email-label"></strong></p>
+          <form id="verify-form" class="form-grid">
             <div>
-              <label for="signupName">Full name</label>
-              <input type="text" id="signupName" name="name" autocomplete="name" required placeholder="Your name" />
+              <label for="verify-otp">6-digit code</label>
+              <input type="text" id="verify-otp" inputmode="numeric" autocomplete="one-time-code" maxlength="8" required />
             </div>
-            <div>
-              <label for="signupEmail">Email</label>
-              <input type="email" id="signupEmail" name="email" autocomplete="email" required placeholder="you@university.edu.gh" />
-            </div>
-            <div>
-              <label for="signupPassword">Password</label>
-              <input type="password" id="signupPassword" name="password" autocomplete="new-password" required minlength="6" />
-            </div>
-            <p id="signupError" class="muted" role="alert" aria-live="polite" style="margin: 0; color: var(--danger, #f87171); min-height: 1.25em;"></p>
-            <div class="btn-row" style="margin-top: 0.5rem;">
-              <button type="submit" class="btn btn--primary btn--block">Create account</button>
-              <a class="btn btn--ghost btn--block" href="onboarding.html">Continue to profile setup</a>
+            <div class="btn-row">
+              <button type="button" class="btn btn--ghost" id="verify-cancel">Back</button>
+              <button type="submit" class="btn btn--primary">Verify &amp; continue</button>
             </div>
           </form>
         </div>
@@ -129,53 +147,9 @@
 
   <footer class="site-foot">ALU Hackathon 2026 · CampusConnect Ghana</footer>
 
-  <script>
-    (function () {
-      var loginTab = document.getElementById("loginTab");
-      var signupTab = document.getElementById("signupTab");
-      var loginFormContainer = document.getElementById("loginFormContainer");
-      var signupFormContainer = document.getElementById("signupFormContainer");
-      var loginForm = document.getElementById("loginForm");
-      var signupForm = document.getElementById("signupForm");
-
-      function showLoginMode() {
-        loginTab.setAttribute("aria-selected", "true");
-        signupTab.setAttribute("aria-selected", "false");
-        loginFormContainer.hidden = false;
-        signupFormContainer.hidden = true;
-      }
-      function showSignupMode() {
-        loginTab.setAttribute("aria-selected", "false");
-        signupTab.setAttribute("aria-selected", "true");
-        loginFormContainer.hidden = true;
-        signupFormContainer.hidden = false;
-      }
-      loginTab.addEventListener("click", showLoginMode);
-      signupTab.addEventListener("click", showSignupMode);
-
-      var loginRoleTabs = document.querySelectorAll("#loginFormContainer .tabs [role='tab']");
-      loginRoleTabs.forEach(function (tab) {
-        tab.addEventListener("click", function () {
-          var isOrg = tab.id === "tab-organizer";
-          loginRoleTabs.forEach(function (t) {
-            t.setAttribute("aria-selected", t === tab ? "true" : "false");
-          });
-          loginForm.setAttribute("data-role", isOrg ? "organizer" : "student");
-        });
-      });
-
-      var signupRoleTabs = document.querySelectorAll("#signupFormContainer .tabs [role='tab']");
-      signupRoleTabs.forEach(function (tab) {
-        tab.addEventListener("click", function () {
-          var isOrg = tab.id === "signup-tab-organizer";
-          signupRoleTabs.forEach(function (t) {
-            t.setAttribute("aria-selected", t === tab ? "true" : "false");
-          });
-          signupForm.setAttribute("data-role", isOrg ? "organizer" : "student");
-        });
-      });
-    })();
-  </script>
+  <script src="js/insforge-env.js"></script>
+  <script src="js/login-ui.js"></script>
+  <script type="module" src="js/auth.js"></script>
   <script src="js/app.js" defer></script>
 </body>
 </html>

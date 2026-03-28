@@ -3,4 +3,26 @@ Thumbs.db
 *.log
 .env
 .env.*
+!.env.example
 node_modules/
+
+# Generated from .env / npm run env:generate — never commit secrets
+js/insforge-env.js
+
+# Agent tooling — not application source
+skills-lock.json
+
+# InsForge & AI agent skills
+.insforge
+.agent
+.agents
+.augment
+.claude
+.cline
+.github/copilot*
+.kilocode
+.qoder
+.qwen
+.roo
+.trae
+.windsurf

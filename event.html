@@ -29,10 +29,11 @@
           <input type="checkbox" id="nav-toggle" class="nav__toggle" />
           <label for="nav-toggle" class="nav__burger" aria-label="Open menu"><span></span></label>
           <nav class="nav" id="site-nav" aria-label="Primary">
-            <a href="index.html">Home</a>
-            <a href="saved.html">Saved</a>
-            <a href="submit.html">Post</a>
-            <a href="login.html">Logout</a>
+            <a href="index.html">Feed</a>
+            <a href="saved.html" class="js-student-only" hidden>Saved</a>
+            <a href="submit.html" class="js-organizer-only" hidden>Post</a>
+            <a href="organizer-dashboard.html" class="js-organizer-only" hidden>Dashboard</a>
+            <a href="login.html">Account</a>
           </nav>
         </div>
       </div>
@@ -42,18 +43,17 @@
   <main>
     <a class="back-link" href="index.html">Back to your feed</a>
 
-    <div id="eventContainer">
     <article class="card card--glass event-detail__hero">
       <div class="event-detail__badges">
-        <span class="tag">Scholarship</span>
-        <span class="match-pill">94% match for your profile</span>
+        <span class="tag" id="event-category">…</span>
+        <span class="match-pill" id="event-match">…</span>
       </div>
-      <h1>Women in STEM Excellence Award</h1>
-      <p class="lead" style="margin-bottom: 0.5rem;">Ghana Education Trust</p>
-      <p class="muted" style="margin: 0;">Posted 2 Mar 2026 · Apply by <strong class="text-highlight">12 Apr 2026</strong></p>
+      <h1 id="event-title">Loading…</h1>
+      <p class="lead" style="margin-bottom: 0.5rem;" id="event-org">…</p>
+      <p class="muted" style="margin: 0;">Apply by <span id="event-deadline"><strong class="text-highlight">…</strong></span></p>
 
       <div class="event-detail__actions">
-        <a class="btn btn--primary" href="#" rel="noopener">Apply on organizer site</a>
+        <a class="btn btn--primary" id="event-apply" href="#" rel="noopener">Apply on organizer site</a>
         <button type="button" class="btn btn--ghost" id="btn-save">Save for later</button>
         <a class="btn btn--ghost" href="submit.html">Report incorrect info</a>
       </div>
@@ -62,54 +62,31 @@
     <div class="detail-grid" style="margin-top: 1.75rem;">
       <section class="card card--flat">
         <h2>About</h2>
-        <p class="muted" style="margin-top: 0;">
-          A national scholarship for women pursuing degrees in engineering, computer science, or related fields. Includes tuition support, a monthly stipend, and a year-long mentorship with industry partners.
-        </p>
+        <p class="muted" style="margin-top: 0;" id="event-desc">…</p>
       </section>
 
       <section class="card card--flat">
         <h2>Who should apply</h2>
-        <ul class="detail-list">
-          <li>Women enrolled in accredited Ghanaian tertiary institutions</li>
-          <li>Year 2–4 undergraduate or postgraduate in STEM programmes</li>
-          <li>Minimum GPA equivalent 3.0 / Second Class Upper</li>
-        </ul>
+        <div id="event-elig">…</div>
       </section>
 
       <section class="card card--flat">
         <h2>Format &amp; location</h2>
-        <ul class="detail-list">
-          <li>Remote information session: 8 Apr, 6pm GMT</li>
-          <li>In-person interview shortlist: Accra &amp; Kumasi hubs</li>
-        </ul>
+        <div id="event-location">…</div>
       </section>
 
       <section class="card card--flat">
         <h2>Matching tags</h2>
-        <div class="chip-group">
-          <span class="chip chip--static is-selected">tech</span>
-          <span class="chip chip--static is-selected">engineering</span>
-          <span class="chip chip--static is-selected">scholarship</span>
-          <span class="chip chip--static is-selected">women</span>
-        </div>
+        <div class="chip-group" id="event-tags"></div>
         <p class="field-hint">These tags are how we score fit against your profile — organizers choose them when they post.</p>
       </section>
-    </div>
     </div>
   </main>
 
   <footer class="site-foot">ALU Hackathon 2026 · CampusConnect Ghana</footer>
 
-  <script>
-    (function () {
-      var btn = document.getElementById("btn-save");
-      btn.addEventListener("click", function () {
-        btn.textContent = "Saved ✓";
-        btn.disabled = true;
-        btn.style.borderColor = "#3d4554";
-      });
-    })();
-  </script>
+  <script src="js/insforge-env.js"></script>
+  <script type="module" src="js/event-detail-app.js"></script>
   <script src="js/app.js" defer></script>
 </body>
 </html>

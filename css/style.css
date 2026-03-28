@@ -744,6 +744,7 @@ textarea {
 
 .auth-showcase {
   position: relative;
+  z-index: 0;
   padding: 1rem 0 2rem;
 }
 
@@ -777,6 +778,8 @@ textarea {
   background: var(--surface);
   border: 1px solid var(--border);
   animation: none;
+  /* Decorative only — must not steal clicks from the auth panel beside / below */
+  pointer-events: none;
 }
 
 .float-card:nth-child(1) {
@@ -825,6 +828,8 @@ textarea {
 
 .auth-panel {
   max-width: 440px;
+  position: relative;
+  z-index: 2;
 }
 
 @media (min-width: 960px) {
@@ -842,10 +847,13 @@ textarea {
   background: rgba(0, 0, 0, 0.35);
   border-radius: var(--radius-md);
   border: 1px solid var(--border);
+  position: relative;
+  z-index: 3;
 }
 
 .tabs button {
   flex: 1;
+  min-height: 44px;
   padding: 0.65rem 0.85rem;
   font: inherit;
   font-weight: 700;
@@ -855,6 +863,9 @@ textarea {
   background: transparent;
   color: var(--text-muted);
   cursor: pointer;
+  position: relative;
+  z-index: 1;
+  -webkit-tap-highlight-color: rgba(5, 150, 105, 0.25);
   transition: color var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast);
 }
 
@@ -1498,4 +1509,79 @@ body.is-ready main {
   .nav {
     padding-bottom: max(1rem, env(safe-area-inset-bottom));
   }
+}
+
+/* ——— Auth + dashboard (InsForge) ——— */
+.auth-mode-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.auth-mode-bar .chip {
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: transparent;
+  font: inherit;
+  color: var(--text-muted);
+}
+
+.auth-mode-bar .chip.is-selected {
+  border-color: var(--accent-line);
+  color: var(--text);
+  background: var(--accent-soft);
+}
+
+.auth-alert {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  color: var(--accent-alt);
+}
+
+.auth-alert--error {
+  color: #fca5a5;
+}
+
+.verify-panel {
+  margin-top: 0.5rem;
+}
+
+.verify-panel .form-grid {
+  margin-top: 1rem;
+}
+
+.dashboard-table-wrap {
+  overflow-x: auto;
+  margin-top: 1.25rem;
+}
+
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.dashboard-table th,
+.dashboard-table td {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.dashboard-table th {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.dashboard-table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.dashboard-table a {
+  color: var(--link);
+}
+
+[data-theme="light"] .dashboard-table tbody tr:hover td {
+  background: rgba(0, 0, 0, 0.03);
 }

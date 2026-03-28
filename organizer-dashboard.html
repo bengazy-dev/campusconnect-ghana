@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Saved — CampusConnect Ghana</title>
+  <title>Organizer dashboard — CampusConnect Ghana</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -12,9 +12,8 @@
   <script>
   (function(){try{var k="campusconnect-theme",t=localStorage.getItem(k);if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();
   </script>
-
 </head>
-<body class="page page--saved">
+<body class="page page--submit">
   <header class="site-header">
     <div class="site-header__inner">
       <a class="logo" href="index.html">
@@ -29,12 +28,12 @@
           <input type="checkbox" id="nav-toggle" class="nav__toggle" />
           <label for="nav-toggle" class="nav__burger" aria-label="Open menu"><span></span></label>
           <nav class="nav" id="site-nav" aria-label="Primary">
-        <a href="index.html">Feed</a>
-        <a href="saved.html" class="is-active js-student-only">Saved</a>
-        <a href="submit.html" class="js-organizer-only" hidden>Post</a>
-        <a href="organizer-dashboard.html" class="js-organizer-only" hidden>Dashboard</a>
-        <a href="login.html">Account</a>
-      </nav>
+            <a href="index.html">Feed</a>
+            <a href="saved.html" class="js-student-only" hidden>Saved</a>
+            <a href="submit.html" class="js-organizer-only">Post</a>
+            <a href="organizer-dashboard.html" class="is-active js-organizer-only">Dashboard</a>
+            <a href="login.html">Account</a>
+          </nav>
         </div>
       </div>
     </div>
@@ -42,25 +41,37 @@
 
   <main>
     <header class="page-head">
-      <p class="eyebrow">Your shortlist</p>
-      <h1>Saved for when you’re ready</h1>
+      <p class="eyebrow">Organizer</p>
+      <h1>Your listings</h1>
       <p class="lead">
-        Deadlines, links, and context in one calm place — open an item when you’re ready to apply for real.
+        Opportunities you published appear here. Students discover them on the main feed.
       </p>
+      <p class="muted" style="margin-top: 0.5rem;">Signed in as <strong id="dashboard-org" class="text-highlight">…</strong></p>
     </header>
 
-    <section class="event-grid" aria-label="Saved opportunities">
-      <p class="muted" style="grid-column: 1 / -1;">Loading saved items…</p>
-    </section>
+    <div class="dashboard-table-wrap card card--glass">
+      <table class="dashboard-table" id="dashboard-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Deadline</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
 
-    <p class="empty-hint">
-      Want more? Head to the <a href="index.html">feed</a> and hit <strong style="color: var(--text);">Save for later</strong> on anything that sparks interest.
+    <p style="margin-top: 1.5rem;">
+      <a class="btn btn--primary" href="submit.html">Post new opportunity</a>
     </p>
   </main>
 
   <footer class="site-foot">ALU Hackathon 2026 · CampusConnect Ghana</footer>
+
   <script src="js/insforge-env.js"></script>
-  <script type="module" src="js/saved-app.js"></script>
+  <script type="module" src="js/organizer-dashboard-app.js"></script>
   <script src="js/app.js" defer></script>
 </body>
 </html>

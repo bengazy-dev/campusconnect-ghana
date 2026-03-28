@@ -1,0 +1,16 @@
+{
+  "name": "campusconnect-ghana",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:config": "esbuild js/insforge-config-source.js --bundle --format=esm --outfile=js/vendor/insforge-config.bundle.js --platform=browser",
+    "postinstall": "npm run build:config",
+    "create-test-accounts": "node scripts/create-test-accounts.mjs"
+  },
+  "dependencies": {
+    "@insforge/sdk": "1.1.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}

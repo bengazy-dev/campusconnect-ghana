@@ -15,7 +15,7 @@
 
 </head>
 <body class="page page--feed">
-  <div id="loading" class="app-loader" aria-busy="true" aria-label="Loading CampusConnect">
+  <div id="app-loader" class="app-loader" aria-busy="true" aria-label="Loading CampusConnect">
     <div class="app-loader__inner">
       <div class="app-loader__brand">
         <img src="assets/logo.png" alt="" class="app-loader__logo" width="48" height="48" decoding="async" />
@@ -40,24 +40,19 @@
           <input type="checkbox" id="nav-toggle" class="nav__toggle" />
           <label for="nav-toggle" class="nav__burger" aria-label="Open menu"><span></span></label>
           <nav class="nav" id="site-nav" aria-label="Primary">
-            <a href="index.html" class="is-active">Home</a>
-            <a href="saved.html">Saved</a>
-            <a href="login.html">Logout</a>
+            <a href="index.html" class="is-active">Feed</a>
+            <a href="saved.html" class="js-student-only">Saved</a>
+            <a href="submit.html" class="js-organizer-only" hidden>Post</a>
+            <a href="organizer-dashboard.html" class="js-organizer-only" hidden>Dashboard</a>
+            <a href="login.html">Account</a>
           </nav>
         </div>
       </div>
     </div>
   </header>
 
-  <main id="content">
+  <main>
     <header class="page-hero">
-      <div class="hero-welcome" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; flex-wrap: wrap;">
-        <img id="userAvatar" src="assets/logo.png" alt="" width="48" height="48" decoding="async" style="border-radius: 50%; border: 1px solid var(--border); object-fit: cover;" />
-        <div>
-          <p class="eyebrow" style="margin-bottom: 0.25rem;">Welcome back</p>
-          <p style="margin: 0; font-weight: 700; font-size: 1.1rem;"><span id="userName">Ama</span> · <span id="userInstitution" class="muted" style="font-weight: 500;">University of Ghana</span></p>
-        </div>
-      </div>
       <p class="eyebrow">Personalized for you</p>
       <h1>Opportunities that fit your path — <span class="headline-accent">not a random list</span></h1>
       <p class="lead">
@@ -95,83 +90,16 @@
         </div>
       </div>
 
-      <div class="event-grid" id="eventsGrid" aria-label="Personalized opportunities">
-        <a class="event-card" href="event.html?id=1" data-type="scholarship">
-          <div class="event-card__top">
-            <div>
-              <span class="tag">Scholarship</span>
-              <h3 class="event-card__title">Women in STEM Excellence Award</h3>
-              <p class="event-card__org">Ghana Education Trust</p>
-            </div>
-            <span class="match-pill" title="Match score">94% match</span>
-          </div>
-          <p class="event-card__body">Full ride + mentorship. Open to Year 2–4 women in engineering and CS.</p>
-          <p class="event-card__meta">Apply by 12 Apr · Remote info session</p>
-        </a>
-
-        <a class="event-card" href="event.html?id=2" data-type="workshop">
-          <div class="event-card__top">
-            <div>
-              <span class="tag">Workshop</span>
-              <h3 class="event-card__title">Build your first API in a day</h3>
-              <p class="event-card__org">Accra Dev Community</p>
-            </div>
-            <span class="match-pill">88% match</span>
-          </div>
-          <p class="event-card__body">Hands-on backend basics. Laptop required.</p>
-          <p class="event-card__meta">5 Apr · Hybrid (Accra)</p>
-        </a>
-
-        <a class="event-card" href="event.html?id=3" data-type="internship">
-          <div class="event-card__top">
-            <div>
-              <span class="tag">Internship</span>
-              <h3 class="event-card__title">Summer analyst — digital banking</h3>
-              <p class="event-card__org">Pan-African Bank</p>
-            </div>
-            <span class="match-pill">81% match</span>
-          </div>
-          <p class="event-card__body">8-week programme. Penultimate-year students preferred.</p>
-          <p class="event-card__meta">Deadline 20 Mar · Accra</p>
-        </a>
-
-        <a class="event-card" href="event.html?id=4" data-type="competition">
-          <div class="event-card__top">
-            <div>
-              <span class="tag">Competition</span>
-              <h3 class="event-card__title">Campus Innovation Challenge 2026</h3>
-              <p class="event-card__org">ALU &amp; partners</p>
-            </div>
-            <span class="match-pill">76% match</span>
-          </div>
-          <p class="event-card__body">Teams of 3–5. Climate + education tracks.</p>
-          <p class="event-card__meta">Pitch day 28 Mar · National</p>
-        </a>
+      <div class="event-grid" id="feed-root" aria-label="Personalized opportunities">
+        <p class="muted" style="grid-column: 1 / -1;">Loading opportunities…</p>
       </div>
     </section>
   </main>
 
   <footer class="site-foot">ALU Hackathon 2026 · CampusConnect Ghana · Built for students who move</footer>
 
-  <script>
-    (function () {
-      var root = document.getElementById("eventsGrid");
-      var filters = document.querySelectorAll("#feed-filters .chip");
-      filters.forEach(function (chip) {
-        chip.addEventListener("click", function () {
-          var f = chip.getAttribute("data-filter");
-          filters.forEach(function (c) {
-            c.classList.toggle("is-selected", c === chip);
-          });
-          root.querySelectorAll(".event-card").forEach(function (card) {
-            var t = card.getAttribute("data-type");
-            var show = f === "all" || t === f;
-            card.style.display = show ? "" : "none";
-          });
-        });
-      });
-    })();
-  </script>
+  <script src="js/insforge-env.js"></script>
+  <script type="module" src="js/feed-app.js"></script>
   <script src="js/app.js" defer></script>
 </body>
 </html>
