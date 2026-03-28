@@ -15,7 +15,7 @@
 
 </head>
 <body class="page page--feed">
-  <div id="app-loader" class="app-loader" aria-busy="true" aria-label="Loading CampusConnect">
+  <div id="loading" class="app-loader" aria-busy="true" aria-label="Loading CampusConnect">
     <div class="app-loader__inner">
       <div class="app-loader__brand">
         <img src="assets/logo.png" alt="" class="app-loader__logo" width="48" height="48" decoding="async" />
@@ -40,18 +40,24 @@
           <input type="checkbox" id="nav-toggle" class="nav__toggle" />
           <label for="nav-toggle" class="nav__burger" aria-label="Open menu"><span></span></label>
           <nav class="nav" id="site-nav" aria-label="Primary">
-            <a href="index.html" class="is-active">Feed</a>
+            <a href="index.html" class="is-active">Home</a>
             <a href="saved.html">Saved</a>
-            <a href="submit.html">Post</a>
-            <a href="login.html">Account</a>
+            <a href="login.html">Logout</a>
           </nav>
         </div>
       </div>
     </div>
   </header>
 
-  <main>
+  <main id="content">
     <header class="page-hero">
+      <div class="hero-welcome" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; flex-wrap: wrap;">
+        <img id="userAvatar" src="assets/logo.png" alt="" width="48" height="48" decoding="async" style="border-radius: 50%; border: 1px solid var(--border); object-fit: cover;" />
+        <div>
+          <p class="eyebrow" style="margin-bottom: 0.25rem;">Welcome back</p>
+          <p style="margin: 0; font-weight: 700; font-size: 1.1rem;"><span id="userName">Ama</span> · <span id="userInstitution" class="muted" style="font-weight: 500;">University of Ghana</span></p>
+        </div>
+      </div>
       <p class="eyebrow">Personalized for you</p>
       <h1>Opportunities that fit your path — <span class="headline-accent">not a random list</span></h1>
       <p class="lead">
@@ -89,7 +95,7 @@
         </div>
       </div>
 
-      <div class="event-grid" id="feed-root" aria-label="Personalized opportunities">
+      <div class="event-grid" id="eventsGrid" aria-label="Personalized opportunities">
         <a class="event-card" href="event.html?id=1" data-type="scholarship">
           <div class="event-card__top">
             <div>
@@ -149,7 +155,7 @@
 
   <script>
     (function () {
-      var root = document.getElementById("feed-root");
+      var root = document.getElementById("eventsGrid");
       var filters = document.querySelectorAll("#feed-filters .chip");
       filters.forEach(function (chip) {
         chip.addEventListener("click", function () {

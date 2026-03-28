@@ -41,12 +41,12 @@
   }
 
   function initLoader() {
-    var el = document.getElementById("app-loader");
+    var el = document.getElementById("loading");
     if (!el) {
       document.body.classList.add("is-ready");
       return;
     }
-    if (!document.getElementById("feed-root")) {
+    if (!document.getElementById("eventsGrid") && !document.getElementById("savedGrid")) {
       el.remove();
       document.body.classList.add("is-ready");
       return;

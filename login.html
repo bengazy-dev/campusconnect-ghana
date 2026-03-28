@@ -29,7 +29,7 @@
           <input type="checkbox" id="nav-toggle" class="nav__toggle" />
           <label for="nav-toggle" class="nav__burger" aria-label="Open menu"><span></span></label>
           <nav class="nav" id="site-nav" aria-label="Primary">
-        <a href="index.html">Feed</a>
+        <a href="index.html">Home</a>
         <a href="saved.html">Saved</a>
         <a href="submit.html">Post an opportunity</a>
       </nav>
@@ -70,40 +70,59 @@
         <h1>Sign in to your space</h1>
         <p class="muted" style="margin: 0 0 1.35rem;">Welcome back — choose student or organizer below.</p>
 
-        <div class="tabs" role="tablist" aria-label="Account type">
-          <button type="button" id="tab-student" role="tab" aria-selected="true" aria-controls="panel-student">Student</button>
-          <button type="button" id="tab-organizer" role="tab" aria-selected="false" aria-controls="panel-organizer">Organizer</button>
+        <div class="tabs" role="tablist" aria-label="Authentication mode">
+          <button type="button" id="loginTab" role="tab" aria-selected="true" aria-controls="loginFormContainer">Login</button>
+          <button type="button" id="signupTab" role="tab" aria-selected="false" aria-controls="signupFormContainer">Sign Up</button>
         </div>
 
-        <form id="panel-student" role="tabpanel" aria-labelledby="tab-student" class="form-grid" data-role="student">
-          <div>
-            <label for="student-email">Email</label>
-            <input type="email" id="student-email" name="email" autocomplete="email" required placeholder="you@university.edu.gh" />
+        <div id="loginFormContainer">
+          <div class="tabs" role="tablist" aria-label="Account type" style="margin-top: 1rem;">
+            <button type="button" id="tab-student" role="tab" aria-selected="true" aria-controls="loginForm">Student</button>
+            <button type="button" id="tab-organizer" role="tab" aria-selected="false" aria-controls="loginForm">Organizer</button>
           </div>
-          <div>
-            <label for="student-password">Password</label>
-            <input type="password" id="student-password" name="password" autocomplete="current-password" required minlength="6" />
-          </div>
-          <div class="btn-row" style="margin-top: 0.5rem;">
-            <button type="submit" class="btn btn--primary btn--block">Sign in</button>
-            <a class="btn btn--ghost btn--block" href="onboarding.html">Create student account</a>
-          </div>
-        </form>
 
-        <form id="panel-organizer" role="tabpanel" aria-labelledby="tab-organizer" class="form-grid" hidden data-role="organizer">
-          <div>
-            <label for="org-email">Work email</label>
-            <input type="email" id="org-email" name="email" autocomplete="email" required placeholder="team@organization.org" />
+          <form id="loginForm" class="form-grid" data-role="student" style="margin-top: 1rem;">
+            <div>
+              <label for="loginEmail">Email</label>
+              <input type="email" id="loginEmail" name="email" autocomplete="email" required placeholder="you@university.edu.gh" />
+            </div>
+            <div>
+              <label for="loginPassword">Password</label>
+              <input type="password" id="loginPassword" name="password" autocomplete="current-password" required minlength="6" />
+            </div>
+            <p id="loginError" class="muted" role="alert" aria-live="polite" style="margin: 0; color: var(--danger, #f87171); min-height: 1.25em;"></p>
+            <div class="btn-row" style="margin-top: 0.5rem;">
+              <button type="submit" class="btn btn--primary btn--block">Sign in</button>
+            </div>
+          </form>
+        </div>
+
+        <div id="signupFormContainer" hidden>
+          <div class="tabs" role="tablist" aria-label="Account type" style="margin-top: 1rem;">
+            <button type="button" id="signup-tab-student" role="tab" aria-selected="true" aria-controls="signupForm">Student</button>
+            <button type="button" id="signup-tab-organizer" role="tab" aria-selected="false" aria-controls="signupForm">Organizer</button>
           </div>
-          <div>
-            <label for="org-password">Password</label>
-            <input type="password" id="org-password" name="password" autocomplete="current-password" required minlength="6" />
-          </div>
-          <div class="btn-row" style="margin-top: 0.5rem;">
-            <button type="submit" class="btn btn--primary btn--block">Sign in</button>
-            <a class="btn btn--ghost btn--block" href="submit.html">Register as organizer</a>
-          </div>
-        </form>
+
+          <form id="signupForm" class="form-grid" data-role="student" style="margin-top: 1rem;">
+            <div>
+              <label for="signupName">Full name</label>
+              <input type="text" id="signupName" name="name" autocomplete="name" required placeholder="Your name" />
+            </div>
+            <div>
+              <label for="signupEmail">Email</label>
+              <input type="email" id="signupEmail" name="email" autocomplete="email" required placeholder="you@university.edu.gh" />
+            </div>
+            <div>
+              <label for="signupPassword">Password</label>
+              <input type="password" id="signupPassword" name="password" autocomplete="new-password" required minlength="6" />
+            </div>
+            <p id="signupError" class="muted" role="alert" aria-live="polite" style="margin: 0; color: var(--danger, #f87171); min-height: 1.25em;"></p>
+            <div class="btn-row" style="margin-top: 0.5rem;">
+              <button type="submit" class="btn btn--primary btn--block">Create account</button>
+              <a class="btn btn--ghost btn--block" href="onboarding.html">Continue to profile setup</a>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </main>
@@ -112,17 +131,47 @@
 
   <script>
     (function () {
-      var tabEls = document.querySelectorAll(".tabs [role='tab']");
-      var panelStudent = document.getElementById("panel-student");
-      var panelOrganizer = document.getElementById("panel-organizer");
-      tabEls.forEach(function (tab) {
+      var loginTab = document.getElementById("loginTab");
+      var signupTab = document.getElementById("signupTab");
+      var loginFormContainer = document.getElementById("loginFormContainer");
+      var signupFormContainer = document.getElementById("signupFormContainer");
+      var loginForm = document.getElementById("loginForm");
+      var signupForm = document.getElementById("signupForm");
+
+      function showLoginMode() {
+        loginTab.setAttribute("aria-selected", "true");
+        signupTab.setAttribute("aria-selected", "false");
+        loginFormContainer.hidden = false;
+        signupFormContainer.hidden = true;
+      }
+      function showSignupMode() {
+        loginTab.setAttribute("aria-selected", "false");
+        signupTab.setAttribute("aria-selected", "true");
+        loginFormContainer.hidden = true;
+        signupFormContainer.hidden = false;
+      }
+      loginTab.addEventListener("click", showLoginMode);
+      signupTab.addEventListener("click", showSignupMode);
+
+      var loginRoleTabs = document.querySelectorAll("#loginFormContainer .tabs [role='tab']");
+      loginRoleTabs.forEach(function (tab) {
         tab.addEventListener("click", function () {
           var isOrg = tab.id === "tab-organizer";
-          tabEls.forEach(function (t) {
+          loginRoleTabs.forEach(function (t) {
             t.setAttribute("aria-selected", t === tab ? "true" : "false");
           });
-          panelStudent.hidden = isOrg;
-          panelOrganizer.hidden = !isOrg;
+          loginForm.setAttribute("data-role", isOrg ? "organizer" : "student");
+        });
+      });
+
+      var signupRoleTabs = document.querySelectorAll("#signupFormContainer .tabs [role='tab']");
+      signupRoleTabs.forEach(function (tab) {
+        tab.addEventListener("click", function () {
+          var isOrg = tab.id === "signup-tab-organizer";
+          signupRoleTabs.forEach(function (t) {
+            t.setAttribute("aria-selected", t === tab ? "true" : "false");
+          });
+          signupForm.setAttribute("data-role", isOrg ? "organizer" : "student");
         });
       });
     })();
